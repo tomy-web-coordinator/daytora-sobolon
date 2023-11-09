@@ -1,0 +1,894 @@
+@use "./mq" as *;
+@use "./variables" as *;
+@use "./common" as *;
+@use "./drawer" as *;
+
+// header
+.header {
+  padding-top: 21px;
+  padding-bottom: 21px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #fff;
+  z-index: 999;
+
+  @include mq(pc) {
+    height: 70px;
+    text-align: center;
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    width: 120px;
+    height: 22px;
+    transition: all 0.5s;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+  &__nav {
+    display: none;
+    @include mq(pc) {
+      display: flex;
+      gap: 46px;
+    }
+  }
+
+  &__link {
+    padding-block: 8px;
+    @include mq(pc) {
+      color: var(--333333, $main-font-color);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 170%; /* 27.2px */
+      transition: all 0.3s;
+
+      &:hover {
+        color: $main-color;
+      }
+    }
+  }
+
+  &__open {
+    @include mq(pc) {
+      display: none;
+    }
+  }
+}
+
+// fv
+.fv {
+  &__inner {
+    position: relative;
+  }
+  &__image {
+    @include mq(tb) {
+      max-width: 990px;
+      margin-left: auto;
+      display: block;
+    }
+  }
+  &__message {
+    margin-top: 30px;
+
+    @include mq(pc) {
+      position: absolute;
+      inset-block: 0;
+      margin-block: auto;
+      left: 0;
+      padding: 80px 40px;
+      height: fit-content;
+      background-color: #fff;
+    }
+  }
+  &__title {
+    font-size: 26px;
+    font-weight: 600;
+
+    br {
+      display: none;
+    }
+  }
+  &__text {
+    margin-top: 16px;
+  }
+}
+
+// concept
+.concept {
+  &__inner {
+  }
+  &__contents {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+
+    @include mq(pc) {
+      flex-direction: row;
+      gap: calc(80px / 1200px * 100%);
+      align-items: center;
+    }
+  }
+
+  &__image {
+    @include mq(pc) {
+      width: calc(600px / 1200px * 100%);
+      flex-shrink: 0;
+    }
+  }
+  &__body {
+    color: var(--333333, $main-font-color);
+    font-weight: 600;
+    line-height: 170%; /* 34px */
+
+    @include mq(pc) {
+      flex-grow: 1;
+      margin-top: 40px;
+    }
+  }
+  &__lead {
+    p {
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    @include mq(tb) {
+      font-size: 18px;
+    }
+
+    @include mq(pc) {
+      font-size: 20px;
+    }
+  }
+
+  &__description {
+    margin-top: 22px;
+
+    @include mq(pc) {
+      margin-top: 40px;
+    }
+    p {
+      font-weight: 300;
+    }
+  }
+}
+
+// feature
+.feature {
+  &__inner {
+  }
+  &__item-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    // align-items: center;
+
+    @include mq(tb) {
+      flex-direction: row;
+      gap: 40px;
+    }
+    @include mq(pc) {
+      gap: 60px;
+    }
+    @include mq(xl) {
+      gap: 90px;
+    }
+  }
+}
+
+// featureの共通クラス
+.feature-item {
+  background: #fff;
+  box-shadow: 3px 3px 15px 0px rgba(96, 96, 96, 0.16);
+
+  @include mq(pc) {
+    flex: 1;
+  }
+
+  &__image {
+    text-align: center;
+  }
+  &__description {
+    padding: 26px 0;
+    color: var(--333333, $main-font-color);
+    text-align: center;
+    font-weight: 600;
+  }
+}
+
+// qa
+.qa {
+  background: url(../img/question-bg-mask.png) no-repeat top center / cover;
+  padding-block: 180px 50px;
+  position: relative;
+
+  // 擬似要素でスモークのマスクをつける
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.12);
+    z-index: 1;
+  }
+
+  @include mq(tb) {
+    background: url(../img/qa-bg-pc.png) no-repeat top center / cover;
+    padding-block: 123px 122px;
+  }
+
+  &__inner {
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    color: var(--ffffff, #fff);
+    font-weight: 600;
+    line-height: 170%; /* 34px */
+    position: relative;
+    z-index: 51;
+
+    @include mq(tb) {
+      width: calc(600px / 1200px * 100%);
+    }
+
+    &-lead {
+      font-size: 20px;
+      font-weight: 600;
+
+      @include mq(tb) {
+        font-size: 22px;
+      }
+    }
+    &-description {
+      font-size: 14px;
+      font-weight: 600;
+
+      @include mq(tb) {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+// products
+.products {
+  &__inner {
+    padding-inline: 56px;
+
+    @include mq(pc) {
+      max-width: calc(940px + 40px * 2);
+      padding-inline: 40px;
+    }
+  }
+
+  &__item-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include mq(tb) {
+      flex-direction: row;
+      gap: 50px;
+    }
+    @include mq(pc) {
+      gap: 80px;
+    }
+  }
+
+  &__button {
+    text-align: center;
+    margin-top: 42px;
+
+    @include mq(tb) {
+      margin-top: 44px;
+    }
+  }
+}
+
+// products-itemの共通クラス
+.products-item {
+  // max-width: 263px;
+  margin: 0 auto;
+
+  @include mq(tb) {
+    flex: 1;
+    &:hover {
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__image {
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    img {
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+  &__contents {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @include mq(pc) {
+      margin-top: 18px;
+    }
+  }
+  &__description {
+    color: var(--333333, $main-font-color);
+    font-size: 14px;
+    font-weight: 300;
+  }
+  &__price {
+    color: #989898;
+    font-size: 14px;
+    font-weight: 300;
+  }
+}
+
+// news
+.news {
+  &__inner {
+    @include mq(tb) {
+      max-width: calc(1040px + 40px * 2);
+      padding-inline: 40px;
+    }
+  }
+  &__item-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+
+    @include mq(tb) {
+      gap: 23px;
+    }
+  }
+
+  &__item {
+    padding-bottom: 28px;
+    border-bottom: 1px solid #e0e0e0;
+
+    @include mq(tb) {
+      padding-bottom: 23px;
+    }
+  }
+  &__button {
+    text-align: center;
+    margin-top: 42px;
+
+    @include mq(tb) {
+      margin-top: 44px;
+    }
+  }
+}
+
+// news-itemの共通クラス
+.news-item {
+  @include mq(tb) {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 1040px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    &:hover {
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__image {
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    justify-items: center;
+
+    @include mq(tb) {
+      flex-basis: 30%;
+      width: 260px;
+      flex-shrink: 0;
+    }
+
+    img {
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+  &__contents {
+    margin-top: 16px;
+
+    @include mq(tb) {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      flex-grow: 1;
+      flex-basis: 70%;
+      width: 70%;
+      margin-top: 0;
+    }
+  }
+  &__time {
+    color: var(--333333, $main-font-color);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 170%; /* 23.8px */
+    text-align: left;
+  }
+  &__title {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--333333, $main-font-color);
+
+    @include mq(pc) {
+      font-size: 18px;
+      margin-top: 16px;
+    }
+  }
+  &__text {
+    margin-top: 14px;
+    color: #888;
+    font-size: 14px;
+    font-weight: 300;
+
+    @include mq(pc) {
+      margin-top: 10px;
+    }
+  }
+}
+
+// concept2
+.concept-motto {
+  &__inner {
+  }
+  &__contents {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @include mq(tb) {
+      flex-direction: row-reverse;
+      gap: 40px;
+      align-items: center;
+      // max-width: 1200px;
+    }
+
+    @include mq(pc) {
+      gap: 60px;
+    }
+    @include mq(xl) {
+      gap: 80px;
+    }
+  }
+  &__image {
+    text-align: center;
+
+    @include mq(tb) {
+      width: calc(600px / 1200px * 100%);
+      flex-shrink: 0;
+    }
+  }
+  &__message {
+    font-size: 20px;
+    margin-top: 22px;
+    color: var(--333333, $main-font-color);
+    font-weight: 600;
+    line-height: 170%; /* 34px */
+
+    @include mq(tb) {
+      flex-grow: 1;
+    }
+  }
+  &__title {
+    font-weight: 600;
+    font-size: 20px;
+
+    @include mq(tb) {
+      margin-bottom: 36px;
+      font-size: 22px;
+    }
+
+    @include mq(pc) {
+      font-size: 25px;
+    }
+    @include mq(xl) {
+      font-size: 28px;
+    }
+  }
+
+  &__text {
+    margin-top: 22px;
+    color: var(--333333, $main-font-color);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 170%; /* 23.8px */
+
+    @include mq(tb) {
+      margin-top: 36px;
+      font-size: 16px;
+    }
+  }
+}
+
+// contact
+.contact {
+  background: url(../img/contact_bg.png) no-repeat center center / cover;
+  padding-block: 56px;
+
+  @include mq(tb) {
+    padding-block: 80px;
+  }
+
+  &__inner {
+    margin-right: auto;
+    margin-left: auto;
+
+    @include mq(tb) {
+      max-width: calc(510px + 40px * 2);
+      padding-inline: 40px;
+    }
+  }
+
+  &__head {
+    color: $main-color;
+  }
+  &__form {
+  }
+  &__text {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+
+    .is-required {
+      color: #e7728e;
+    }
+  }
+
+  &__items {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @include mq(tb) {
+      margin-top: 19px;
+    }
+  }
+
+  &__item {
+  }
+
+  &__required {
+  }
+
+  &__footer {
+    margin-top: 28px;
+
+    @include mq(tb) {
+      margin-top: 32px;
+    }
+  }
+
+  &__privacy {
+    text-align: center;
+  }
+
+  &__submit {
+    text-align: center;
+    margin-top: 23px;
+
+    @include mq(tb) {
+      margin-top: 44px;
+    }
+  }
+}
+
+// form部分の共通パーツ
+.contact-control {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  @include mq(tb) {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  &__head {
+    @include mq(tb) {
+      // これでheadの横幅を固定して、
+      width: 180px;
+      flex-shrink: 0;
+    }
+  }
+
+  &__input {
+    @include mq(tb) {
+      // これで残りのinputの幅をいっぱい使ってねっていうプロパティ
+      flex-grow: 1;
+    }
+  }
+
+  &__radios {
+    display: flex;
+    align-items: center;
+  }
+}
+
+// form-label
+.form-label {
+  display: inline-flex;
+  background: rgba($main-color, 0.7);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 4px;
+  align-items: center;
+  padding: 4px 16px;
+
+  @include mq(tb) {
+    width: 100%;
+    justify-content: center;
+    font-size: 18px;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    padding-inline: 4px;
+    clip-path: polygon(0% 0%, 97% 1%, 100% 49%, 97% 100%, 0% 100%);
+  }
+
+  &__required {
+    color: #e7728e;
+    font-size: 10px;
+    font-weight: 600;
+
+    @include mq(tb) {
+      font-size: 12px;
+    }
+  }
+}
+
+// form-text
+.form-text {
+  width: 100%;
+  height: 40px;
+  border: 0;
+  font-size: 16px;
+  background: #fff;
+  box-shadow: 5px 6px 16px 0px rgba(96, 96, 96, 0.16);
+
+  &:focus {
+    outline: $main-color auto 1px;
+    box-shadow: 5px 6px 16px 0px rgba($main-color, 0.16);
+  }
+}
+
+// form-radio
+.form-radio {
+  position: relative;
+
+  &__input {
+    // これで元々備わっているラジオボタンを見えない位置に配置する
+    // 見ないようにしている
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+
+    // チェックされたら、form-radio__textの要素を変化させる
+    &:checked + .form-radio__text {
+      background-color: $main-color;
+      color: #fff;
+    }
+
+    &:focus + .form-radio__text {
+      outline: $main-color auto 1px;
+      box-shadow: 5px 6px 16px 0px rgba($main-color, 0.16);
+    }
+  }
+  &__text {
+    font-size: 16px;
+    color: $main-color;
+    letter-spacing: 0.026px;
+    border: 1px solid #fff;
+    background: #fff;
+    width: 80px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+  }
+}
+
+// form-textarea
+.form-textarea {
+  width: 100%;
+  height: 122px;
+  background: #fff;
+  box-shadow: 5px 6px 16px 0px rgba(96, 96, 96, 0.16);
+  resize: vertical;
+  font-size: 16px;
+  border: 0;
+
+  &:focus {
+    outline: $main-color auto 1px;
+    box-shadow: 5px 6px 16px 0px rgba($main-color, 0.16);
+  }
+}
+
+// form-checkbox
+.form-checkbox {
+  position: relative;
+  &__input {
+    // 下記プロパティで標準のチェックボックスを見えなくしている
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    // これで元々備わっているラジオボタンを見えない位置に配置する
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+
+    // チェックされた時に、form-checkbox__textの
+    // after要素がopacity1で表示される
+    &:checked + .form-checkbox__text {
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &:focus + .form-checkbox__text {
+      &::before {
+        outline: $main-color auto 1px;
+        box-shadow: 5px 6px 16px 0px rgba($main-color, 0.1);
+      }
+    }
+  }
+
+  &__text {
+    font-size: 16px;
+    padding-left: 30px;
+    a {
+      text-decoration: underline;
+      color: $main-color;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      inset-block: 0;
+      margin-block: auto;
+    }
+
+    &::before {
+      width: 22px;
+      height: 22px;
+      background: #fff;
+      border: 1px solid $main-color;
+    }
+    &::after {
+      opacity: 0;
+      width: 19.414px;
+      height: 14.621px;
+      left: 1.29px;
+      background: url(../img/check-box-icon.png) no-repeat center center /
+        contain;
+    }
+  }
+}
+
+// footer
+.footer {
+  padding-block: 40px 7px;
+  background: #f7f7f7;
+
+  @include mq(pc) {
+    padding-block: 40px 14px;
+  }
+
+  &__inner {
+  }
+  // &__content {
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
+
+  &__logo {
+    transition: all 0.5s;
+
+    a {
+      width: 120px;
+      display: block;
+      margin-inline: auto;
+    }
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+  &__menu-items {
+    margin-top: 22px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    @include mq(tb) {
+      flex-direction: row;
+      gap: 32px;
+    }
+  }
+  &__menu-item {
+    font-size: 12px;
+    a {
+      transition: all 0.5s;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+  &__sns {
+    &-items {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+
+      @include mq(tb) {
+        margin-top: 16px;
+      }
+    }
+
+    &-item {
+    }
+
+    &-link {
+      transition: all 0.5s;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+  &__copyright {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 300;
+
+    @include mq(tb) {
+      margin-top: 28px;
+    }
+
+    small {
+      font-size: inherit;
+      color: #888;
+    }
+  }
+}
